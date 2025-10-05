@@ -197,3 +197,11 @@
 }
 
 
+
+
+@layer utilities {
+  .rotate-360 {
+    transform: rotate(360deg);
+  }
+}
+
