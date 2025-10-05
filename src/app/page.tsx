@@ -42,7 +42,7 @@ export default function Home() {
               <AboutMe />
             </div>
             {/* Experience - Right */}
-            <div className="w-full md:w-1/3">
+            <div className="w-full h-full md:w-1/3">
               <Experience />
             </div>
           </div>

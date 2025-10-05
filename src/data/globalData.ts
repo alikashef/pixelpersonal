@@ -9,6 +9,12 @@ import {
 
 // src/data/globalData.ts
 export const experiences = [
+
+   {
+    title: "Product Designer, Graphic Designer",
+    company: "Amnmoj",
+    year: "October 2025 - Present",
+  },
  
   {
     title: "Product Designer, Graphic Designer",
@@ -164,6 +170,18 @@ export const people = [
     name: "Parsa Ghasemi",
     designation: "UI/UX Designer",
     image: "/pg.png",
+  },
+  {
+    id: 7,
+    name: "Porya Kazemirad",
+    designation: "Front-end Developer",
+    image: "/porya.png",
+  },
+   {
+    id: 8,
+    name: "Pooya Javar",
+    designation: "Django Developer",
+    image: "/pooya.png",
   },
 ];
 
