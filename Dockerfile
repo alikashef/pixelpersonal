@@ -1,3 +1,6 @@
+# -------------------------
+# مرحله پایه
+# -------------------------
 FROM node:18-alpine AS base
 
 # نصب ابزارهای لازم
@@ -9,19 +12,25 @@ RUN curl -fsSL https://bun.sh/install | bash && \
 
 WORKDIR /app
 
-# مرحله نصب پکیج‌ها
+# -------------------------
+# نصب dependencies
+# -------------------------
 FROM base AS deps
-COPY package.json bun.lock* ./
+COPY package.json bun.lockb* ./
 RUN bun install --frozen-lockfile
 
+# -------------------------
 # مرحله بیلد
+# -------------------------
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN bun run build
 
-# مرحله نهایی (production)
+# -------------------------
+# مرحله production
+# -------------------------
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
@@ -30,4 +39,5 @@ ENV NODE_ENV=production
 COPY --from=builder /app ./
 
 EXPOSE 3000
+
 CMD ["bun", "run", "start"]
