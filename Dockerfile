@@ -1,7 +1,6 @@
-# syntax=docker/dockerfile:1
-
 FROM node:18-alpine AS base
 
+# نصب ابزارهای لازم
 RUN apk add --no-cache libc6-compat curl bash
 
 # نصب bun
@@ -10,22 +9,24 @@ RUN curl -fsSL https://bun.sh/install | bash && \
 
 WORKDIR /app
 
-# --- Install deps ---
+# مرحله نصب پکیج‌ها
 FROM base AS deps
 COPY package.json bun.lock* ./
 RUN bun install --frozen-lockfile
 
-# --- Build ---
+# مرحله بیلد
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN bun run build
 
-# --- Runner ---
+# مرحله نهایی (production)
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+
+# کپی خروجی بیلد
 COPY --from=builder /app ./
 
 EXPOSE 3000
