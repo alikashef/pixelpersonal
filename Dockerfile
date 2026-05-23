@@ -10,7 +10,7 @@ WORKDIR /app
 # نصب dependencies
 # -------------------------
 FROM base AS deps
-ARG NPM_REGISTRY=https://registry.npmmirror.com
+ARG NPM_REGISTRY=https://mirror-npm.runflare.com
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --registry ${NPM_REGISTRY}
 
